@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="pink">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>RoyalPay — Premium Payment Collection</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Outfit:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ========== RESET & BASE ========== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Outfit',sans-serif;overflow-x:hidden;background:var(--bg-primary);color:var(--text-primary);min-height:100dvh;-webkit-tap-highlight-color:transparent;transition:background .6s,color .6s}
+a{text-decoration:none;color:inherit}
+button{border:none;background:none;cursor:pointer;font-family:inherit;color:inherit}
+input{font-family:inherit;border:none;outline:none;background:none;color:inherit}
+img{max-width:100%;display:block}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
+
+/* ========== CSS VARIABLES — PINK ROYAL ========== */
+[data-theme="pink"]{
+--bg-primary:#0c0510;--bg-secondary:#1a0e1e;--bg-tertiary:#120814;
+--accent:#ff4d8d;--accent-rgb:255,77,141;--accent-light:#ff80ab;--accent-dark:#c2185b;
+--text-primary:#fce4ec;--text-secondary:#f8bbd0;--text-muted:#ad6889;
+--glass-bg:rgba(255,77,141,.07);--glass-border:rgba(255,77,141,.18);--glass-shadow:rgba(255,77,141,.12);
+--card-bg:rgba(255,77,141,.05);--card-hover:rgba(255,77,141,.1);
+--success:#4caf50;--warning:#ff9800;--danger:#f44336;
+--gradient-hero:linear-gradient(135deg,#ff4d8d,#9c27b0,#ff4d8d);
+--gradient-bg:radial-gradient(ellipse at 50% 0%,rgba(255,77,141,.12) 0%,transparent 60%);
+--shadow-accent:0 0 30px rgba(255,77,141,.25);
+--cherry-color:#ffb7c5;--cherry-color2:#ff8fa3;
+--input-bg:rgba(255,77,141,.08);--input-border:rgba(255,77,141,.25);
+--badge-pending-bg:rgba(255,152,0,.15);--badge-pending-text:#ffb74d;
+--badge-success-bg:rgba(76,175,80,.15);--badge-success-text:#81c784;
+--overlay:rgba(12,5,16,.85);
+}
+
+/* ========== DARK LUXURY ========== */
+[data-theme="dark"]{
+--bg-primary:#050508;--bg-secondary:#0d0d15;--bg-tertiary:#08080e;
+--accent:#a855f7;--accent-rgb:168,85,247;--accent-light:#c084fc;--accent-dark:#7c3aed;
+--text-primary:#e8e0f0;--text-secondary:#9b8fbf;--text-muted:#6b5f8a;
+--glass-bg:rgba(168,85,247,.06);--glass-border:rgba(168,85,247,.16);--glass-shadow:rgba(168,85,247,.1);
+--card-bg:rgba(168,85,247,.04);--card-hover:rgba(168,85,247,.1);
+--success:#22c55e;--warning:#eab308;--danger:#ef4444;
+--gradient-hero:linear-gradient(135deg,#a855f7,#3b82f6,#a855f7);
+--gradient-bg:radial-gradient(ellipse at 50% 0%,rgba(168,85,247,.1) 0%,transparent 60%);
+--shadow-accent:0 0 30px rgba(168,85,247,.25);
+--cherry-color:#c084fc;--cherry-color2:#818cf8;
+--input-bg:rgba(168,85,247,.07);--input-border:rgba(168,85,247,.22);
+--badge-pending-bg:rgba(234,179,8,.12);--badge-pending-text:#facc15;
+--badge-success-bg:rgba(34,197,94,.12);--badge-success-text:#4ade80;
+--overlay:rgba(5,5,8,.88);
+}
+
+/* ========== LIGHT LUXURY ========== */
+[data-theme="light"]{
+--bg-primary:#faf5f5;--bg-secondary:#f0e8ea;--bg-tertiary:#f5eef0;
+--accent:#c2185b;--accent-rgb:194,24,91;--accent-light:#e91e63;--accent-dark:#880e4f;
+--text-primary:#1a1a2e;--text-secondary:#4a4a5e;--text-muted:#8a8a9e;
+--glass-bg:rgba(255,255,255,.55);--glass-border:rgba(194,24,91,.12);--glass-shadow:rgba(194,24,91,.08);
+--card-bg:rgba(255,255,255,.5);--card-hover:rgba(194,24,91,.06);
+--success:#2e7d32;--warning:#f57f17;--danger:#c62828;
+--gradient-hero:linear-gradient(135deg,#c2185b,#7b1fa2,#c2185b);
+--gradient-bg:radial-gradient(ellipse at 50% 0%,rgba(194,24,91,.06) 0%,transparent 60%);
+--shadow-accent:0 0 20px rgba(194,24,91,.12);
+--cherry-color:#f48fb1;--cherry-color2:#ce93d8;
+--input-bg:rgba(194,24,91,.05);--input-border:rgba(194,24,91,.2);
+--badge-pending-bg:rgba(245,127,23,.1);--badge-pending-text:#e65100;
+--badge-success-bg:rgba(46,125,50,.1);--badge-success-text:#2e7d32;
+--overlay:rgba(250,245,245,.88);
+}
+
+/* ========== TYPOGRAPHY ========== */
+.font-display{font-family:'Cinzel',serif}
+.text-gradient{background:var(--gradient-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 200%;animation:gradientShift 4s ease infinite}
+@keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+/* ========== LAYOUT ========== */
+.screen{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s,transform .6s;pointer-events:auto}
+.screen.hidden{opacity:0;pointer-events:none;transform:scale(1.02)}
+#app{display:none;flex-direction:column;min-height:100dvh;padding-bottom:80px;position:relative;z-index:2}
+#app.visible{display:flex;animation:fadeUp .8s ease forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ========== CHERRY BLOSSOM CANVAS ========== */
+#petalCanvas{position:fixed;inset:0;z-index:1;pointer-events:none}
+
+/* ========== ENTRY SCREEN ========== */
+#entry-screen{background:#050508;z-index:200}
+.entry-content{text-align:center;position:relative;z-index:2}
+.entry-crown{font-size:clamp(48px,12vw,72px);margin-bottom:20px;animation:crownFloat 3s ease-in-out infinite;filter:drop-shadow(0 0 30px var(--accent));color:var(--accent)}
+@keyframes crownFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+.entry-title{font-family:'Cinzel',serif;font-size:clamp(28px,7vw,44px);font-weight:900;letter-spacing:.12em;background:linear-gradient(135deg,#ff4d8d,#a855f7,#ff4d8d);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientShift 3s ease infinite;margin-bottom:8px}
+.entry-sub{font-size:clamp(12px,3vw,16px);color:#9b8fbf;letter-spacing:.3em;text-transform:uppercase;font-weight:300;margin-bottom:40px}
+.entry-loader{width:200px;height:3px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;margin:0 auto}
+.entry-loader-bar{height:100%;width:0%;background:linear-gradient(90deg,#ff4d8d,#a855f7);border-radius:3px;transition:width .1s linear;box-shadow:0 0 12px rgba(255,77,141,.5)}
+
+/* ========== LOGIN SCREEN ========== */
+#login-screen{background:var(--bg-primary);z-index:190;padding:24px}
+.login-card{width:100%;max-width:380px;padding:40px 28px;border-radius:24px;background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);box-shadow:var(--shadow-accent),0 20px 60px rgba(0,0,0,.3);text-align:center;animation:cardFloat 4s ease-in-out infinite}
+@keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.login-icon{width:64px;height:64px;border-radius:50%;background:var(--gradient-hero);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:24px;color:#fff;box-shadow:0 0 30px rgba(var(--accent-rgb),.4);animation:iconPulse 2s ease-in-out infinite}
+@keyframes iconPulse{0%,100%{box-shadow:0 0 20px rgba(var(--accent-rgb),.3)}50%{box-shadow:0 0 40px rgba(var(--accent-rgb),.6)}}
+.login-title{font-family:'Cinzel',serif;font-size:22px;font-weight:700;margin-bottom:6px}
+.login-sub{font-size:13px;color:var(--text-muted);margin-bottom:28px}
+.login-input{width:100%;padding:14px 18px;border-radius:14px;background:var(--input-bg);border:1.5px solid var(--input-border);font-size:15px;color:var(--text-primary);transition:all .3s;margin-bottom:16px}
+.login-input::placeholder{color:var(--text-muted)}
+.login-input:focus{border-color:var(--accent);box-shadow:0 0 20px rgba(var(--accent-rgb),.2)}
+.login-btn{width:100%;padding:15px;border-radius:14px;background:var(--gradient-hero);background-size:200% 200%;color:#fff;font-size:16px;font-weight:600;letter-spacing:.05em;transition:all .3s;animation:gradientShift 4s ease infinite;position:relative;overflow:hidden}
+.login-btn:active{transform:scale(.97)}
+.login-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%);animation:shimmer 2.5s infinite}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.login-error{color:var(--danger);font-size:13px;margin-top:12px;min-height:20px;transition:all .3s}
+
+/* ========== HEADER ========== */
+.app-header{padding:16px 20px 8px;position:sticky;top:0;z-index:50;background:var(--bg-primary);transition:background .6s}
+.header-row{display:flex;align-items:center;justify-content:space-between}
+.greeting-text{font-size:13px;color:var(--text-muted);font-weight:300}
+.greeting-name{font-family:'Cinzel',serif;font-size:clamp(18px,5vw,24px);font-weight:700}
+.header-actions{display:flex;gap:10px}
+.header-btn{width:40px;height:40px;border-radius:12px;background:var(--glass-bg);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--text-secondary);transition:all .3s;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.header-btn:active{transform:scale(.92);background:var(--card-hover)}
+.header-badge{position:relative}
+.header-badge::after{content:'';position:absolute;top:8px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+
+/* ========== PAGES ========== */
+.page{display:none;padding:0 20px 20px;animation:pageIn .5s ease}
+.page.active{display:block}
+@keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ========== SUMMARY CARDS ========== */
+.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.summary-card{padding:16px 12px;border-radius:16px;background:var(--glass-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-border);text-align:center;transition:all .3s;position:relative;overflow:hidden}
+.summary-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(var(--accent-rgb),.06) 0%,transparent 60%);animation:cardGlow 4s ease-in-out infinite}
+@keyframes cardGlow{0%,100%{opacity:.5}50%{opacity:1}}
+.summary-card:active{transform:scale(.96)}
+.summary-icon{font-size:20px;margin-bottom:8px;color:var(--accent)}
+.summary-value{font-size:clamp(18px,4.5vw,24px);font-weight:800;font-family:'Cinzel',serif}
+.summary-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-top:4px}
+
+/* ========== MY PAYMENT CARD ========== */
+.my-payment{margin:16px 0;padding:22px;border-radius:20px;background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);box-shadow:var(--shadow-accent);position:relative;overflow:hidden;transition:all .3s}
+.my-payment::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gradient-hero);background-size:200% 200%;animation:gradientShift 3s ease infinite}
+.my-payment-pending{border-color:rgba(var(--accent-rgb),.3)}
+.my-payment-success{border-color:rgba(var(--success),.3)}
+.my-payment-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.my-payment-title{font-family:'Cinzel',serif;font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px}
+.shield-icon{color:var(--success);font-size:14px;animation:shieldPulse 2s ease-in-out infinite}
+@keyframes shieldPulse{0%,100%{opacity:.7}50%{opacity:1}}
+.status-badge{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;animation:badgePulse 2.5s ease-in-out infinite}
+.badge-pending{background:var(--badge-pending-bg);color:var(--badge-pending-text)}
+.badge-success{background:var(--badge-success-bg);color:var(--badge-success-text)}
+@keyframes badgePulse{0%,100%{opacity:1}50%{opacity:.7}}
+.my-payment-amount{font-size:clamp(32px,8vw,44px);font-weight:900;font-family:'Cinzel',serif;margin:8px 0}
+.my-payment-info{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:6px}
+.ai-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:8px;font-size:10px;font-weight:600;background:rgba(var(--accent-rgb),.1);color:var(--accent);border:1px solid rgba(var(--accent-rgb),.2);margin-top:10px}
+
+/* ========== SECTION TITLES ========== */
+.section-title{font-family:'Cinzel',serif;font-size:16px;font-weight:700;margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--glass-border),transparent)}
+
+/* ========== TRANSACTION CARDS ========== */
+.tx-card{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;background:var(--card-bg);border:1px solid transparent;margin-bottom:8px;transition:all .3s;position:relative;overflow:hidden}
+.tx-card:active{transform:scale(.98);background:var(--card-hover)}
+.tx-card.own{border-color:rgba(var(--accent-rgb),.25);background:rgba(var(--accent-rgb),.06)}
+.tx-avatar{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex-shrink:0;color:#fff;position:relative}
+.tx-avatar.pending-av{background:linear-gradient(135deg,#ff9800,#f57c00)}
+.tx-avatar.success-av{background:linear-gradient(135deg,#4caf50,#2e7d32)}
+.tx-info{flex:1;min-width:0}
+.tx-name{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tx-time{font-size:11px;color:var(--text-muted);margin-top:2px}
+.tx-right{text-align:right;flex-shrink:0}
+.tx-amount{font-weight:700;font-size:15px;font-family:'Cinzel',serif}
+.tx-amount.masked{color:var(--text-muted);font-size:13px}
+.tx-status{font-size:10px;margin-top:3px;font-weight:500}
+
+/* ========== FILTER TABS ========== */
+.filter-tabs{display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+.filter-tab{padding:8px 16px;border-radius:10px;font-size:12px;font-weight:600;background:var(--card-bg);border:1px solid transparent;white-space:nowrap;transition:all .3s}
+.filter-tab.active{background:rgba(var(--accent-rgb),.12);border-color:rgba(var(--accent-rgb),.3);color:var(--accent)}
+.filter-tab:active{transform:scale(.95)}
+
+/* ========== PAYMENT PAGE ========== */
+.qr-container{margin:16px auto;max-width:320px;padding:28px 24px;border-radius:24px;background:var(--glass-bg);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:2px solid rgba(var(--accent-rgb),.25);box-shadow:0 0 40px rgba(var(--accent-rgb),.15),0 20px 60px rgba(0,0,0,.2);text-align:center;position:relative;overflow:hidden;animation:qrFloat 5s ease-in-out infinite}
+@keyframes qrFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.qr-container::before{content:'';position:absolute;inset:-2px;border-radius:26px;background:var(--gradient-hero);background-size:300% 300%;animation:gradientShift 4s ease infinite;z-index:-1;opacity:.4;filter:blur(8px)}
+.qr-container::after{content:'';position:absolute;inset:0;border-radius:24px;background:var(--bg-primary);z-index:-1}
+.qr-label-top{font-family:'Cinzel',serif;font-size:13px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.qr-image-wrap{width:220px;height:220px;margin:0 auto 16px;border-radius:16px;overflow:hidden;border:2px solid rgba(var(--accent-rgb),.2);box-shadow:0 0 20px rgba(var(--accent-rgb),.1);background:#fff;padding:8px}
+.qr-image-wrap img{width:100%;height:100%;object-fit:contain;border-radius:10px}
+.qr-amount{font-family:'Cinzel',serif;font-size:28px;font-weight:900;margin:8px 0 4px}
+.qr-scan-text{font-size:13px;color:var(--text-muted);display:flex;align-items:center;justify-content:center;gap:6px}
+.qr-scan-text i{color:var(--success)}
+
+.pay-buttons{display:flex;flex-direction:column;gap:10px;margin:20px 0}
+.pay-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;border-radius:16px;font-size:15px;font-weight:600;transition:all .3s;position:relative;overflow:hidden}
+.pay-btn:active{transform:scale(.97)}
+.pay-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transform:translateX(-100%);transition:transform .6s}
+.pay-btn:hover::after{transform:translateX(100%)}
+.pay-btn-gpay{background:linear-gradient(135deg,#1a1a2e,#0d0d15);color:#fff;border:1px solid rgba(168,85,247,.3);box-shadow:0 0 20px rgba(168,85,247,.15)}
+.pay-btn-gpay .gpay-logo{background:linear-gradient(90deg,#4285f4,#ea4335,#fbbc05,#34a853);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;font-size:17px}
+.pay-btn-upi{background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(10px);color:var(--text-primary)}
+
+.proof-section{margin:24px 0 10px}
+.proof-title{font-family:'Cinzel',serif;font-size:14px;font-weight:600;margin-bottom:12px;text-align:center;color:var(--text-secondary)}
+.proof-buttons{display:flex;flex-direction:column;gap:8px}
+.proof-btn{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:14px;background:var(--card-bg);border:1px solid var(--glass-border);font-size:13px;font-weight:500;transition:all .3s}
+.proof-btn:active{transform:scale(.97);background:var(--card-hover)}
+.proof-btn i{font-size:18px;width:24px;text-align:center}
+.proof-btn .fa-envelope{color:#ea4335}
+.proof-btn .fa-brands.fa-whatsapp{color:#25d366}
+.proof-btn .fa-brands.fa-telegram{color:#0088cc}
+
+/* ========== SETTINGS PAGE ========== */
+.settings-section{margin-bottom:20px}
+.settings-label{font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px;font-weight:600}
+.theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.theme-card{padding:16px 10px;border-radius:16px;background:var(--card-bg);border:2px solid transparent;text-align:center;transition:all .3s;cursor:pointer}
+.theme-card.active{border-color:var(--accent);box-shadow:0 0 20px rgba(var(--accent-rgb),.2)}
+.theme-card:active{transform:scale(.95)}
+.theme-preview{width:36px;height:36px;border-radius:10px;margin:0 auto 8px;position:relative;overflow:hidden}
+.theme-name{font-size:11px;font-weight:600}
+.tp-pink{background:linear-gradient(135deg,#0c0510,#ff4d8d)}
+.tp-dark{background:linear-gradient(135deg,#050508,#a855f7)}
+.tp-light{background:linear-gradient(135deg,#faf5f5,#c2185b)}
+.settings-card{padding:16px;border-radius:16px;background:var(--card-bg);border:1px solid var(--glass-border);margin-bottom:8px;display:flex;align-items:center;gap:14px;transition:all .3s}
+.settings-card:active{background:var(--card-hover)}
+.settings-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.settings-info{flex:1}
+.settings-info h4{font-size:14px;font-weight:600}
+.settings-info p{font-size:11px;color:var(--text-muted);margin-top:2px}
+.logout-btn{width:100%;padding:14px;border-radius:14px;background:rgba(244,67,54,.08);border:1px solid rgba(244,67,54,.2);color:#f44336;font-size:14px;font-weight:600;margin-top:10px;transition:all .3s}
+.logout-btn:active{transform:scale(.97);background:rgba(244,67,54,.15)}
+
+/* ========== BOTTOM NAV ========== */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:80;padding:6px 16px;padding-bottom:max(6px,env(safe-area-inset-bottom));background:var(--glass-bg);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid var(--glass-border);display:none}
+.bottom-nav.visible{display:flex;justify-content:space-around}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 12px;border-radius:12px;transition:all .3s;font-size:10px;font-weight:500;color:var(--text-muted);position:relative}
+.nav-item i{font-size:18px;transition:all .3s}
+.nav-item.active{color:var(--accent)}
+.nav-item.active i{transform:translateY(-2px)}
+.nav-item.active::before{content:'';position:absolute;top:-6px;width:20px;height:3px;border-radius:3px;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.nav-item:active{transform:scale(.9)}
+
+/* ========== MODALS ========== */
+.modal-overlay{position:fixed;inset:0;z-index:300;background:var(--overlay);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .4s;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.modal-overlay.visible{opacity:1;pointer-events:auto}
+.modal-card{width:100%;max-width:360px;padding:32px 24px;border-radius:24px;background:var(--bg-secondary);border:1px solid var(--glass-border);box-shadow:0 0 60px rgba(var(--accent-rgb),.15);text-align:center;transform:scale(.9) translateY(20px);transition:transform .4s;position:relative;overflow:hidden}
+.modal-overlay.visible .modal-card{transform:scale(1) translateY(0)}
+.modal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gradient-hero);background-size:200% 200%;animation:gradientShift 3s ease infinite}
+.modal-icon{font-size:48px;margin-bottom:16px}
+.modal-icon.success{color:var(--success);animation:successPop .6s ease}
+.modal-icon.fail{color:var(--danger);animation:shake .5s ease}
+@keyframes successPop{0%{transform:scale(0)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.modal-title{font-family:'Cinzel',serif;font-size:20px;font-weight:700;margin-bottom:8px}
+.modal-text{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:20px}
+.modal-input{width:100%;padding:14px 18px;border-radius:14px;background:var(--input-bg);border:1.5px solid var(--input-border);font-size:15px;color:var(--text-primary);margin-bottom:14px;text-align:center;letter-spacing:.15em;font-weight:600}
+.modal-input::placeholder{color:var(--text-muted);letter-spacing:normal;font-weight:400}
+.modal-input:focus{border-color:var(--accent);box-shadow:0 0 20px rgba(var(--accent-rgb),.15)}
+.modal-btn{width:100%;padding:14px;border-radius:14px;font-size:15px;font-weight:600;transition:all .3s;margin-bottom:8px}
+.modal-btn:active{transform:scale(.97)}
+.modal-btn-primary{background:var(--gradient-hero);background-size:200% 200%;color:#fff;animation:gradientShift 4s ease infinite}
+.modal-btn-secondary{background:var(--card-bg);border:1px solid var(--glass-border);color:var(--text-primary)}
+
+/* ========== TOAST ========== */
+.toast-container{position:fixed;top:20px;left:20px;right:20px;z-index:400;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{padding:14px 18px;border-radius:14px;background:var(--bg-secondary);border:1px solid var(--glass-border);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 10px 40px rgba(0,0,0,.3);display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;pointer-events:auto;transform:translateY(-20px);opacity:0;animation:toastIn .4s ease forwards}
+@keyframes toastIn{to{transform:translateY(0);opacity:1}}
+.toast.out{animation:toastOut .3s ease forwards}
+@keyframes toastOut{to{transform:translateY(-20px);opacity:0}}
+.toast i{font-size:16px}
+.toast.success i{color:var(--success)}
+.toast.error i{color:var(--danger)}
+.toast.info i{color:var(--accent)}
+
+/* ========== SKELETON LOADER ========== */
+.skeleton{position:relative;overflow:hidden;background:var(--card-bg);border-radius:12px}
+.skeleton::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(var(--accent-rgb),.06),transparent);animation:skeletonShimmer 1.8s infinite}
+@keyframes skeletonShimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.skeleton-line{height:14px;border-radius:6px;margin-bottom:8px}
+.skeleton-line.short{width:60%}
+.skeleton-line.medium{width:80%}
+.skeleton-circle{width:42px;height:42px;border-radius:12px}
+
+/* ========== CONFETTI ========== */
+.confetti-container{position:fixed;inset:0;z-index:350;pointer-events:none;overflow:hidden}
+.confetti-piece{position:absolute;width:8px;height:8px;top:-10px;animation:confettiFall linear forwards}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+
+/* ========== FLOATING ACTION ========== */
+.fab{position:fixed;bottom:90px;right:20px;z-index:70;width:52px;height:52px;border-radius:16px;background:var(--gradient-hero);background-size:200% 200%;color:#fff;font-size:20px;display:none;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(var(--accent-rgb),.35);animation:gradientShift 4s ease infinite,fabPulse 3s ease-in-out infinite;transition:transform .3s}
+.fab.visible{display:flex}
+.fab:active{transform:scale(.9)}
+@keyframes fabPulse{0%,100%{box-shadow:0 0 20px rgba(var(--accent-rgb),.25)}50%{box-shadow:0 0 40px rgba(var(--accent-rgb),.5)}}
+
+/* ========== RESPONSIVE ========== */
+@media(min-width:480px){
+.summary-grid{gap:14px}
+.my-payment{padding:28px}
+.qr-container{max-width:340px}
+}
+@media(min-width:768px){
+.summary-grid{grid-template-columns:repeat(3,1fr);max-width:500px;margin-left:auto;margin-right:auto}
+}
+
+/* ========== REDUCED MOTION ========== */
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* ========== UTILITY ========== */
+.mt-8{margin-top:8px}.mt-16{margin-top:16px}.mt-24{margin-top:24px}.mb-8{margin-bottom:8px}.mb-16{margin-bottom:16px}
+.text-center{text-align:center}.text-accent{color:var(--accent)}.text-muted{color:var(--text-muted)}.text-sm{font-size:12px}.text-xs{font-size:10px}
+.flex-center{display:flex;align-items:center;justify-content:center}
+.gap-8{gap:8px}.gap-12{gap:12px}
+.w-full{width:100%}
+</style>
+</head>
+<body>
+
+<!-- 桜キャンバス -->
+<canvas id="petalCanvas"></canvas>
+
+<!-- エントランス画面 -->
+<div id="entry-screen" class="screen">
+  <div class="entry-content">
+    <div class="entry-crown"><i class="fas fa-crown"></i></div>
+    <div class="entry-title">ROYALPAY</div>
+    <div class="entry-sub">Premium Collection</div>
+    <div class="entry-loader"><div class="entry-loader-bar" id="entryBar"></div></div>
+  </div>
+</div>
+
+<!-- ログイン画面 -->
+<div id="login-screen" class="screen hidden">
+  <div class="login-card">
+    <div class="login-icon"><i class="fas fa-fingerprint"></i></div>
+    <div class="login-title font-display">Welcome Back</div>
+    <div class="login-sub">Enter your name to access your dashboard</div>
+    <input type="text" class="login-input" id="nameInput" placeholder="Type your name..." autocomplete="off" aria-label="Your name">
+    <button class="login-btn" id="loginBtn" aria-label="Login">Enter Dashboard</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+<!-- メインアプリ -->
+<div id="app">
+  <!-- ヘッダー -->
+  <header class="app-header">
+    <div class="header-row">
+      <div>
+        <div class="greeting-text" id="greetingTime"></div>
+        <div class="greeting-name text-gradient" id="greetingName"></div>
+      </div>
+      <div class="header-actions">
+        <button class="header-btn header-badge" id="notifBtn" aria-label="Notifications"><i class="fas fa-bell"></i></button>
+        <button class="header-btn" id="themeToggleHeader" aria-label="Switch theme"><i class="fas fa-palette"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ホームページ -->
+  <section class="page active" id="page-home">
+    <div class="summary-grid" id="summaryGrid"></div>
+    <div id="myPaymentCard"></div>
+    <div class="section-title font-display">Recent Activity</div>
+    <div id="recentFeed"></div>
+  </section>
+
+  <!-- アクティビティページ -->
+  <section class="page" id="page-activity">
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-tab active" data-filter="all">All</button>
+      <button class="filter-tab" data-filter="pending">Pending</button>
+      <button class="filter-tab" data-filter="success">Completed</button>
+    </div>
+    <div id="activityFeed"></div>
+  </section>
+
+  <!-- 支払いページ -->
+  <section class="page" id="page-pay">
+    <div id="payContent"></div>
+  </section>
+
+  <!-- 設定ページ -->
+  <section class="page" id="page-settings">
+    <div id="settingsContent"></div>
+  </section>
+
+  <!-- FAB -->
+  <button class="fab" id="fabBtn" aria-label="Quick Pay"><i class="fas fa-qrcode"></i></button>
+
+  <!-- ボトムナビゲーション -->
+  <nav class="bottom-nav" id="bottomNav">
+    <button class="nav-item active" data-page="home" aria-label="Home"><i class="fas fa-home"></i><span>Home</span></button>
+    <button class="nav-item" data-page="activity" aria-label="Activity"><i class="fas fa-list"></i><span>Activity</span></button>
+    <button class="nav-item" data-page="pay" aria-label="Pay"><i class="fas fa-credit-card"></i><span>Pay</span></button>
+    <button class="nav-item" data-page="settings" aria-label="Settings"><i class="fas fa-cog"></i><span>Settings</span></button>
+  </nav>
+</div>
+
+<!-- モーダルオーバーレイ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-card" id="modalCard"></div>
+</div>
+
+<!-- トースト -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+/* ==========================================
+   データ & 定数
+   ========================================== */
+const USERS = [
+  { id:1, name:"Pujashree Deka", aliases:["puja","pujashree","deka","puhashree","pujashre","pujadeka"], amount:250, status:"pending", time:"Just now" },
+  { id:2, name:"Chandan", aliases:["chandan","chand"], amount:150, status:"success", time:"3 hours ago" },
+  { id:3, name:"Jitomoni", aliases:["jitomoni","jito","jitomon"], amount:100, status:"success", time:"5 hours ago" },
+  { id:4, name:"Dimpi", aliases:["dimpi","dimpy"], amount:80, status:"success", time:"Yesterday" },
+  { id:5, name:"Varsha", aliases:["varsha","varsh"], amount:120, status:"success", time:"Yesterday" },
+  { id:6, name:"Bipasha", aliases:["bipasha","bipa","bipash"], amount:170, status:"success", time:"2 days ago" },
+  { id:7, name:"Monoshree", aliases:["monoshree","mono","monoshri"], amount:190, status:"success", time:"3 days ago" },
+  { id:8, name:"Sourav", aliases:["sourav","sourav1"], amount:100, status:"pending", time:"2 mins ago" },
+  { id:9, name:"Rakesh", aliases:["rakesh","raksh"], amount:150, status:"pending", time:"10 mins ago" },
+  { id:10, name:"Anushka", aliases:["anushka","anush"], amount:80, status:"pending", time:"30 mins ago" },
+  { id:11, name:"Pranjana", aliases:["pranjana","pranjan","pranju"], amount:50, status:"pending", time:"45 mins ago" },
+  { id:12, name:"Ankita", aliases:["ankita","anki"], amount:120, status:"pending", time:"1 hour ago" },
+  { id:13, name:"Parishmita", aliases:["parishmita","pari","parish"], amount:30, status:"pending", time:"1 hour ago" },
+  { id:14, name:"Sourav Das", aliases:["sourav das","souravdas","sourav2"], amount:200, status:"pending", time:"2 hours ago" },
+  { id:15, name:"Trishu", aliases:["trishu","trish"], amount:60, status:"pending", time:"3 hours ago" },
+  { id:16, name:"Bajit", aliases:["bajit","baj"], amount:90, status:"pending", time:"4 hours ago" },
+  { id:17, name:"Junali", aliases:["junali","jun"], amount:130, status:"pending", time:"5 hours ago" }
+];
+
+const QR_URL = "https://i.ibb.co/MDKrKDd2/IMG-20260527-WA0009.jpg";
+const PAYMENT_AMOUNT = 250;
+const UPI_URL = "upi://pay?pa=reinhardsonsangma@okicici&pn=Reinhard%20Son%20Sangma&am=250&cu=INR&tn=Payment%20to%20Reinhard";
+const GMAIL_LINK = "mailto:reinhardsonsangma@gmail.com?subject=Payment%20Proof%20-%20RoyalPay&body=Hi%2C%20I%20have%20completed%20my%20payment.%20Please%20find%20the%20details%20below.";
+const WHATSAPP_LINK = "https://wa.me/917086941967?text=Hi%2C%20I%20have%20completed%20my%20payment%20on%20RoyalPay.%20Please%20verify.";
+const TELEGRAM_LINK = "https://t.me/+917086941967";
+
+/* ==========================================
+   状態管理
+   ========================================== */
+let state = {
+  currentUser: null,
+  theme: localStorage.getItem('royalpay_theme') || 'pink',
+  paymentStart: null,
+  paymentCheckInterval: null,
+  currentFilter: 'all'
+};
+
+/* ==========================================
+   レーベンシュタイン距離 & ファジーマッチング
+   ========================================== */
+function levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  if (m === 0) return n;
+  if (n === 0) return m;
+  const dp = Array.from({length: m + 1}, () => Array(n + 1).fill(0));
+  for (let i = 0; i <= m; i++) dp[i][0] = i;
+  for (let j = 0; j <= n; j++) dp[0][j] = j;
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      const cost = a[i-1] === b[j-1] ? 0 : 1;
+      dp[i][j] = Math.min(dp[i-1][j] + 1, dp[i][j-1] + 1, dp[i-1][j-1] + cost);
+    }
+  }
+  return dp[m][n];
+}
+
+function fuzzyMatch(input, user) {
+  const inp = input.toLowerCase().trim();
+  if (!inp) return 0;
+  const nameLow = user.name.toLowerCase();
+
+  // 完全一致
+  if (nameLow === inp) return 1.0;
+  // 部分一致
+  if (nameLow.includes(inp)) return 0.95;
+  if (inp.includes(nameLow)) return 0.9;
+
+  // エイリアスチェック
+  for (const alias of user.aliases) {
+    if (alias === inp) return 1.0;
+    if (alias.includes(inp) || inp.includes(alias)) return 0.9;
+  }
+
+  // レーベンシュタイン距離による類似度
+  const nameDist = levenshtein(inp, nameLow);
+  const nameSim = 1 - (nameDist / Math.max(inp.length, nameLow.length));
+
+  let maxAliasSim = 0;
+  for (const alias of user.aliases) {
+    const aDist = levenshtein(inp, alias);
+    const aSim = 1 - (aDist / Math.max(inp.length, alias.length));
+    // 部分的なトークン一致も評価
+    const nameParts = nameLow.split(' ');
+    for (const part of nameParts) {
+      const pDist = levenshtein(inp, part);
+      const pSim = 1 - (pDist / Math.max(inp.length, part.length));
+      maxAliasSim = Math.max(maxAliasSim, pSim);
+    }
+    maxAliasSim = Math.max(maxAliasSim, aSim);
+  }
+
+  return Math.max(nameSim, maxAliasSim);
+}
+
+function findBestMatch(input) {
+  let bestUser = null, bestScore = 0;
+  for (const user of USERS) {
+    const score = fuzzyMatch(input, user);
+    if (score > bestScore) { bestScore = score; bestUser = user; }
+  }
+  return bestScore >= 0.55 ? { user: bestUser, score: bestScore } : null;
+}
+
+/* ==========================================
+   テーマシステム
+   ========================================== */
+function setTheme(theme) {
+  state.theme = theme;
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('royalpay_theme', theme);
+}
+
+function cycleTheme() {
+  const themes = ['pink','dark','light'];
+  const idx = themes.indexOf(state.theme);
+  setTheme(themes[(idx + 1) % themes.length]);
+  showToast('info', `Theme switched to ${state.theme.charAt(0).toUpperCase() + state.theme.slice(1)} Royal`);
+  if (document.getElementById('page-settings').classList.contains('active')) renderSettings();
+}
+
+/* ==========================================
+   桜パーティクルシステム
+   ========================================== */
+const petalCanvas = document.getElementById('petalCanvas');
+const petalCtx = petalCanvas.getContext('2d');
+let petals = [];
+
+function resizeCanvas() {
+  petalCanvas.width = window.innerWidth;
+  petalCanvas.height = window.innerHeight;
+}
+
+class Petal {
+  constructor() { this.reset(true); }
+  reset(init = false) {
+    this.x = Math.random() * petalCanvas.width;
+    this.y = init ? Math.random() * petalCanvas.height : -15;
+    this.size = Math.random() * 7 + 3;
+    this.speedY = Math.random() * 1.2 + 0.3;
+    this.speedX = Math.random() * 0.6 - 0.3;
+    this.rotation = Math.random() * Math.PI * 2;
+    this.rotSpeed = (Math.random() - 0.5) * 0.04;
+    this.opacity = Math.random() * 0.35 + 0.1;
+    this.wobble = Math.random() * Math.PI * 2;
+    this.wobbleSpeed = Math.random() * 0.025 + 0.008;
+    this.hue = Math.random() > 0.5 ? 0 : 1; // 0=cherry, 1=accent2
+  }
+  update() {
+    this.y += this.speedY;
+    this.wobble += this.wobbleSpeed;
+    this.x += this.speedX + Math.sin(this.wobble) * 0.4;
+    this.rotation += this.rotSpeed;
+    if (this.y > petalCanvas.height + 20) this.reset();
+  }
+  draw() {
+    const style = getComputedStyle(document.documentElement);
+    const color = this.hue === 0 ? style.getPropertyValue('--cherry-color').trim() : style.getPropertyValue('--cherry-color2').trim();
+    petalCtx.save();
+    petalCtx.translate(this.x, this.y);
+    petalCtx.rotate(this.rotation);
+    petalCtx.globalAlpha = this.opacity;
+    petalCtx.fillStyle = color;
+    petalCtx.beginPath();
+    // 花びらの形
+    const s = Math.max(1, this.size);
+    petalCtx.moveTo(0, -s);
+    petalCtx.bezierCurveTo(s * 0.8, -s * 0.6, s * 0.8, s * 0.6, 0, s);
+    petalCtx.bezierCurveTo(-s * 0.8, s * 0.6, -s * 0.8, -s * 0.6, 0, -s);
+    petalCtx.fill();
+    petalCtx.restore();
+  }
+}
+
+function initPetals() {
+  resizeCanvas();
+  petals = [];
+  const count = Math.min(22, Math.floor(window.innerWidth / 25));
+  for (let i = 0; i < count; i++) petals.push(new Petal());
+}
+
+function animatePetals() {
+  petalCtx.clearRect(0, 0, petalCanvas.width, petalCanvas.height);
+  for (const p of petals) { p.update(); p.draw(); }
+  requestAnimationFrame(animatePetals);
+}
+
+/* ==========================================
+   エントランス画面
+   ========================================== */
+function runEntrySequence() {
+  const bar = document.getElementById('entryBar');
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += Math.random() * 8 + 2;
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(interval);
+      setTimeout(() => {
+        document.getElementById('entry-screen').classList.add('hidden');
+        setTimeout(() => {
+          document.getElementById('entry-screen').style.display = 'none';
+          checkAutoLogin();
+        }, 600);
+      }, 400);
+    }
+    bar.style.width = progress + '%';
+  }, 120);
+}
+
+/* ==========================================
+   ログインシステム
+   ========================================== */
+function checkAutoLogin() {
+  const saved = localStorage.getItem('royalpay_user');
+  if (saved) {
+    try {
+      const userData = JSON.parse(saved);
+      state.currentUser = userData;
+      showDashboard();
+      showToast('success', `Welcome back, ${userData.name}!`);
+    } catch(e) {
+      showLoginScreen();
+    }
+  } else {
+    showLoginScreen();
+  }
+}
+
+function showLoginScreen() {
+  const ls = document.getElementById('login-screen');
+  ls.classList.remove('hidden');
+  setTimeout(() => document.getElementById('nameInput').focus(), 600);
+}
+
+function handleLogin() {
+  const input = document.getElementById('nameInput').value.trim();
+  const errorEl = document.getElementById('loginError');
+  if (!input) { errorEl.textContent = 'Please enter your name'; return; }
+  if (input.length < 2) { errorEl.textContent = 'Name too short'; return; }
+
+  const match = findBestMatch(input);
+  if (!match) {
+    errorEl.textContent = 'No matching account found. Try again.';
+    document.getElementById('nameInput').style.animation = 'shake .5s ease';
+    setTimeout(() => document.getElementById('nameInput').style.animation = '', 500);
+    return;
+  }
+
+  // ユーザーのローカル支払い状況を確認
+  const localStatus = localStorage.getItem(`royalpay_status_${match.user.id}`);
+  const user = { ...match.user, localStatus: localStatus || match.user.status };
+
+  state.currentUser = user;
+  localStorage.setItem('royalpay_user', JSON.stringify(user));
+
+  errorEl.textContent = '';
+  document.getElementById('login-screen').classList.add('hidden');
+  setTimeout(() => showDashboard(), 500);
+  showToast('success', `Matched: ${user.name} (${Math.round(match.score * 100)}% confidence)`);
+}
+
+/* ==========================================
+   ダッシュボード
+   ========================================== */
+function showDashboard() {
+  const app = document.getElementById('app');
+  app.classList.add('visible');
+  document.getElementById('bottomNav').classList.add('visible');
+  document.getElementById('fabBtn').classList.add('visible');
+  updateGreeting();
+  renderSummary();
+  renderMyPayment();
+  renderRecentFeed();
+  renderPayPage();
+  renderSettings();
+}
+
+function updateGreeting() {
+  const hour = new Date().getHours();
+  let greeting;
+  if (hour >= 5 && hour < 12) greeting = 'Good Morning';
+  else if (hour >= 12 && hour < 17) greeting = 'Good Afternoon';
+  else if (hour >= 17 && hour < 21) greeting = 'Good Evening';
+  else greeting = 'Good Night';
+  document.getElementById('greetingTime').textContent = greeting;
+  document.getElementById('greetingName').textContent = state.currentUser ? state.currentUser.name.split(' ')[0] : 'Guest';
+}
+
+function renderSummary() {
+  const grid = document.getElementById('summaryGrid');
+  // 統計計算
+  const totalCollected = USERS.filter(u => u.status === 'success').reduce((s, u) => s + u.amount, 0);
+  const totalPending = USERS.filter(u => u.status === 'pending').reduce((s, u) => s + u.amount, 0);
+  const successCount = USERS.filter(u => u.status === 'success').length;
+
+  grid.innerHTML = `
+    <div class="summary-card">
+      <div class="summary-icon"><i class="fas fa-coins"></i></div>
+      <div class="summary-value" data-count="${totalCollected}">0</div>
+      <div class="summary-label">Collected</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon"><i class="fas fa-hourglass-half"></i></div>
+      <div class="summary-value" data-count="${totalPending}">0</div>
+      <div class="summary-label">Pending</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon"><i class="fas fa-check-circle"></i></div>
+      <div class="summary-value" data-count="${successCount}">0</div>
+      <div class="summary-label">Completed</div>
+    </div>
+  `;
+  // カウンターアニメーション
+  setTimeout(() => {
+    grid.querySelectorAll('[data-count]').forEach(el => {
+      animateCounter(el, parseInt(el.dataset.count));
+    });
+  }, 300);
+}
+
+function animateCounter(el, target, prefix = '', suffix = '') {
+  const duration = 1500;
+  const start = performance.now();
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(target * eased);
+    el.textContent = prefix + current.toLocaleString('en-IN') + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+function getUserPaymentStatus() {
+  if (!state.currentUser) return 'pending';
+  const local = localStorage.getItem(`royalpay_status_${state.currentUser.id}`);
+  return local || state.currentUser.status;
+}
+
+function renderMyPayment() {
+  const container = document.getElementById('myPaymentCard');
+  if (!state.currentUser) { container.innerHTML = ''; return; }
+
+  const status = getUserPaymentStatus();
+  const isPending = status !== 'success';
+  const utr = localStorage.getItem(`royalpay_utr_${state.currentUser.id}`);
+  const amount = state.currentUser.amount || PAYMENT_AMOUNT;
+
+  container.innerHTML = `
+    <div class="my-payment ${isPending ? 'my-payment-pending' : 'my-payment-success'}">
+      <div class="my-payment-header">
+        <div class="my-payment-title">
+          <i class="fas ${isPending ? 'fa-clock' : 'fa-shield-alt'} shield-icon"></i>
+          My Payment
+        </div>
+        <span class="status-badge ${isPending ? 'badge-pending' : 'badge-success'}">${isPending ? 'Pending' : 'Paid'}</span>
+      </div>
+      <div class="my-payment-amount text-gradient">${isPending ? '₹' + amount : '₹' + amount}</div>
+      <div class="my-payment-info">
+        <i class="fas fa-calendar-alt"></i>
+        ${isPending ? 'Payment due' : 'Payment completed'}
+        ${utr ? ' &bull; UTR: ' + utr : ''}
+      </div>
+      <div class="ai-badge">
+        <i class="fas fa-robot"></i>
+        AI Verified &bull; Secure Transaction
+      </div>
+      ${isPending ? `
+        <button class="pay-btn pay-btn-gpay mt-16" onclick="navigateTo('pay')" style="margin-top:16px">
+          <i class="fas fa-credit-card"></i> Pay Now
+        </button>
+      ` : ''}
+    </div>
+  `;
+}
+
+function renderRecentFeed() {
+  const container = document.getElementById('recentFeed');
+  const recent = [...USERS].slice(0, 6);
+  container.innerHTML = recent.map(u => renderTxCard(u, false)).join('');
+}
+
+function renderTxCard(user, showAmount = true) {
+  const isOwn = state.currentUser && user.id === state.currentUser.id;
+  const status = isOwn ? getUserPaymentStatus() : user.status;
+  const isPending = status !== 'success';
+  const initials = user.name.split(' ').map(n => n[0]).join('').substring(0, 2);
+  const amount = user.amount;
+
+  return `
+    <div class="tx-card ${isOwn ? 'own' : ''}">
+      <div class="tx-avatar ${isPending ? 'pending-av' : 'success-av'}">${initials}</div>
+      <div class="tx-info">
+        <div class="tx-name">${user.name}${isOwn ? ' (You)' : ''}</div>
+        <div class="tx-time">${user.time}</div>
+      </div>
+      <div class="tx-right">
+        <div class="tx-amount ${!isOwn && !showAmount ? 'masked' : ''}">${isOwn || showAmount ? '₹' + amount : '₹***'}</div>
+        <div class="tx-status" style="color:${isPending ? 'var(--badge-pending-text)' : 'var(--badge-success-text)'}">${isPending ? 'Pending' : 'Paid'}</div>
+      </div>
+    </div>
+  `;
+}
+
+/* ==========================================
+   アクティビティフィード
+   ========================================== */
+function renderActivityFeed(filter) {
+  const container = document.getElementById('activityFeed');
+  let filtered = [...USERS];
+  if (filter === 'pending') filtered = filtered.filter(u => u.status === 'pending');
+  if (filter === 'success') filtered = filtered.filter(u => u.status === 'success');
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<div class="text-center text-muted mt-24" style="padding:40px 0">No transactions found</div>`;
+    return;
+  }
+  container.innerHTML = filtered.map(u => renderTxCard(u, true)).join('');
+}
+
+/* ==========================================
+   支払いページ
+   ========================================== */
+function renderPayPage() {
+  const container = document.getElementById('payContent');
+  const isPaid = getUserPaymentStatus() === 'success';
+
+  container.innerHTML = `
+    <div class="qr-container">
+      <div class="qr-label-top">Scan to Pay</div>
+      <div class="qr-image-wrap">
+        <img src="${QR_URL}" alt="Payment QR Code" loading="eager">
+      </div>
+      <div class="qr-amount text-gradient">₹${PAYMENT_AMOUNT}</div>
+      <div class="qr-scan-text"><i class="fas fa-lock"></i> Scan & Pay Securely</div>
+    </div>
+
+    ${!isPaid ? `
+      <div class="pay-buttons">
+        <button class="pay-btn pay-btn-gpay" id="gpayBtn" onclick="initiateGPay()">
+          <i class="fas fa-brands fa-google"></i>
+          <span>Pay with</span> <span class="gpay-logo">GPay</span>
+        </button>
+        <button class="pay-btn pay-btn-upi" onclick="initiateUPI()">
+          <i class="fas fa-mobile-alt"></i> Pay via UPI App
+        </button>
+      </div>
+    ` : `
+      <div class="text-center mt-24" style="padding:20px 0">
+        <i class="fas fa-check-circle" style="font-size:40px;color:var(--success);margin-bottom:12px;display:block"></i>
+        <div class="font-display" style="font-size:18px;font-weight:700">Payment Completed</div>
+        <div class="text-muted text-sm mt-8">Your payment has been verified</div>
+      </div>
+    `}
+
+    <div class="proof-section">
+      <div class="proof-title">Submit Payment Proof</div>
+      <div class="proof-buttons">
+        <a href="${GMAIL_LINK}" class="proof-btn" target="_blank" rel="noopener">
+          <i class="fas fa-envelope"></i>
+          <span>Send proof to Gmail</span>
+          <i class="fas fa-chevron-right text-muted" style="margin-left:auto;font-size:12px"></i>
+        </a>
+        <a href="${WHATSAPP_LINK}" class="proof-btn" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i>
+          <span>Send proof on WhatsApp</span>
+          <i class="fas fa-chevron-right text-muted" style="margin-left:auto;font-size:12px"></i>
+        </a>
+        <a href="${TELEGRAM_LINK}" class="proof-btn" target="_blank" rel="noopener">
+          <i class="fab fa-telegram"></i>
+          <span>Telegram Support</span>
+          <i class="fas fa-chevron-right text-muted" style="margin-left:auto;font-size:12px"></i>
+        </a>
+      </div>
+    </div>
+  `;
+}
+
+/* ==========================================
+   支払いシミュレーション
+   ========================================== */
+function initiateGPay() {
+  startPaymentFlow('gpay');
+}
+
+function initiateUPI() {
+  startPaymentFlow('upi');
+}
+
+function startPaymentFlow(method) {
+  state.paymentStart = Date.now();
+
+  showToast('info', 'Redirecting to payment app...');
+
+  // UPIインテントURLを開く
+  setTimeout(() => {
+    window.location.href = UPI_URL;
+  }, 500);
+
+  // 可視性変更リスナー
+  document.addEventListener('visibilitychange', handlePaymentReturn);
+}
+
+function handlePaymentReturn() {
+  if (!document.hidden && state.paymentStart) {
+    const elapsed = (Date.now() - state.paymentStart) / 1000;
+
+    // 少し待ってから結果を表示
+    setTimeout(() => {
+      if (elapsed >= 25) {
+        showPaymentSuccess();
+      } else {
+        showPaymentFailure();
+      }
+      state.paymentStart = null;
+      document.removeEventListener('visibilitychange', handlePaymentReturn);
+    }, 1000);
+  }
+}
+
+function showPaymentSuccess() {
+  launchConfetti();
+  showModal(`
+    <div class="modal-icon success"><i class="fas fa-check-circle"></i></div>
+    <div class="modal-title font-display text-gradient">Payment Successful</div>
+    <div class="modal-text">Thank you from <strong>Reinhard Son Sangma</strong><br>Your payment of ₹${PAYMENT_AMOUNT} has been received.</div>
+    <input type="text" class="modal-input" id="utrInput" placeholder="Enter UTR / Ref Number" inputmode="numeric" aria-label="UTR Number">
+    <button class="modal-btn modal-btn-primary" onclick="submitUTR()">Submit UTR</button>
+  `);
+}
+
+function showPaymentFailure() {
+  showModal(`
+    <div class="modal-icon fail"><i class="fas fa-exclamation-triangle"></i></div>
+    <div class="modal-title font-display">Payment Not Confirmed</div>
+    <div class="modal-text">We couldn't confirm your payment. This may happen if the transaction was not completed. Please try again.</div>
+    <button class="modal-btn modal-btn-primary" onclick="closeModal(); navigateTo('pay');">Retry Payment</button>
+    <button class="modal-btn modal-btn-secondary" onclick="closeModal()">Dismiss</button>
+  `);
+}
+
+function submitUTR() {
+  const utrInput = document.getElementById('utrInput');
+  const utr = utrInput ? utrInput.value.trim() : '';
+
+  if (!utr) {
+    utrInput.style.borderColor = 'var(--danger)';
+    utrInput.style.animation = 'shake .5s ease';
+    setTimeout(() => { utrInput.style.animation = ''; utrInput.style.borderColor = ''; }, 500);
+    return;
+  }
+
+  // UTR保存
+  localStorage.setItem(`royalpay_utr_${state.currentUser.id}`, utr);
+  localStorage.setItem(`royalpay_status_${state.currentUser.id}`, 'success');
+
+  // ユーザー状態更新
+  state.currentUser.localStatus = 'success';
+
+  closeModal();
+  showToast('success', 'UTR submitted successfully! Payment verified.');
+
+  // UI更新
+  setTimeout(() => {
+    renderMyPayment();
+    renderPayPage();
+    renderRecentFeed();
+    renderActivityFeed(state.currentFilter);
+  }, 400);
+}
+
+/* ==========================================
+   設定ページ
+   ========================================== */
+function renderSettings() {
+  const container = document.getElementById('settingsContent');
+  const themeCards = ['pink','dark','light'].map(t => `
+    <div class="theme-card ${state.theme === t ? 'active' : ''}" onclick="setTheme('${t}'); renderSettings();">
+      <div class="theme-preview tp-${t}"></div>
+      <div class="theme-name">${t === 'pink' ? 'Pink Royal' : t === 'dark' ? 'Dark Luxury' : 'Light Luxury'}</div>
+    </div>
+  `).join('');
+
+  container.innerHTML = `
+    <div class="settings-section">
+      <div class="settings-label">Theme</div>
+      <div class="theme-grid">${themeCards}</div>
+    </div>
+    <div class="settings-section">
+      <div class="settings-label">Account</div>
+      <div class="settings-card">
+        <div class="settings-icon" style="background:rgba(var(--accent-rgb),.1);color:var(--accent)"><i class="fas fa-user"></i></div>
+        <div class="settings-info">
+          <h4>${state.currentUser ? state.currentUser.name : 'Guest'}</h4>
+          <p>${state.currentUser ? 'ID: RP-' + String(state.currentUser.id).padStart(4, '0') : 'Not logged in'}</p>
+        </div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-icon" style="background:rgba(var(--accent-rgb),.1);color:var(--accent)"><i class="fas fa-shield-alt"></i></div>
+        <div class="settings-info">
+          <h4>Security Status</h4>
+          <p>AI Verification Active</p>
+        </div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-icon" style="background:rgba(var(--accent-rgb),.1);color:var(--accent)"><i class="fas fa-bell"></i></div>
+        <div class="settings-info">
+          <h4>Notifications</h4>
+          <p>Payment alerts enabled</p>
+        </div>
+      </div>
+      <div class="settings-card" onclick="window.open('${TELEGRAM_LINK}','_blank')">
+        <div class="settings-icon" style="background:rgba(0,136,204,.12);color:#0088cc"><i class="fab fa-telegram"></i></div>
+        <div class="settings-info">
+          <h4>Contact Support</h4>
+          <p>Telegram: @7086941967</p>
+        </div>
+        <i class="fas fa-external-link-alt text-muted" style="font-size:12px"></i>
+      </div>
+    </div>
+    <button class="logout-btn" onclick="handleLogout()">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </button>
+  `;
+}
+
+function handleLogout() {
+  localStorage.removeItem('royalpay_user');
+  state.currentUser = null;
+  location.reload();
+}
+
+/* ==========================================
+   ナビゲーション
+   ========================================== */
+function navigateTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+  const target = document.getElementById('page-' + page);
+  if (target) target.classList.add('active');
+
+  const navItem = document.querySelector(`.nav-item[data-page="${page}"]`);
+  if (navItem) navItem.classList.add('active');
+
+  // FAB表示制御
+  const fab = document.getElementById('fabBtn');
+  fab.style.display = page === 'pay' ? 'none' : 'flex';
+
+  // ページ別レンダリング
+  if (page === 'activity') renderActivityFeed(state.currentFilter);
+  if (page === 'pay') renderPayPage();
+  if (page === 'settings') renderSettings();
+  if (page === 'home') { renderSummary(); renderMyPayment(); renderRecentFeed(); }
+}
+
+/* ==========================================
+   モーダルシステム
+   ========================================== */
+function showModal(html) {
+  document.getElementById('modalCard').innerHTML = html;
+  document.getElementById('modalOverlay').classList.add('visible');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('visible');
+}
+
+/* ==========================================
+   トースト通知
+   ========================================== */
+function showToast(type, message) {
+  const container = document.getElementById('toastContainer');
+  const icons = { success: 'fa-check-circle', error: 'fa-times-circle', info: 'fa-info-circle' };
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `<i class="fas ${icons[type] || icons.info}"></i><span>${message}</span>`;
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.classList.add('out');
+    setTimeout(() => toast.remove(), 300);
+  }, 3500);
+}
+
+/* ==========================================
+   紙吹雪アニメーション
+   ========================================== */
+function launchConfetti() {
+  const container = document.createElement('div');
+  container.className = 'confetti-container';
+  document.body.appendChild(container);
+
+  const colors = ['#ff4d8d','#a855f7','#4caf50','#ff9800','#e91e63','#2196f3','#ffb7c5','#c084fc'];
+  for (let i = 0; i < 60; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + '%';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+    piece.style.animationDelay = Math.random() * 0.8 + 's';
+    piece.style.width = (Math.random() * 8 + 4) + 'px';
+    piece.style.height = (Math.random() * 8 + 4) + 'px';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    container.appendChild(piece);
+  }
+
+  setTimeout(() => container.remove(), 5000);
+}
+
+/* ==========================================
+   フィルタータブ
+   ========================================== */
+function setupFilters() {
+  document.getElementById('filterTabs').addEventListener('click', (e) => {
+    const tab = e.target.closest('.filter-tab');
+    if (!tab) return;
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    state.currentFilter = tab.dataset.filter;
+    renderActivityFeed(state.currentFilter);
+  });
+}
+
+/* ==========================================
+   イベントリスナー
+   ========================================== */
+function setupEvents() {
+  // ログイン
+  document.getElementById('loginBtn').addEventListener('click', handleLogin);
+  document.getElementById('nameInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handleLogin();
+  });
+
+  // ボトムナビ
+  document.getElementById('bottomNav').addEventListener('click', (e) => {
+    const item = e.target.closest('.nav-item');
+    if (item) navigateTo(item.dataset.page);
+  });
+
+  // テーマ切替（ヘッダー）
+  document.getElementById('themeToggleHeader').addEventListener('click', cycleTheme);
+
+  // FAB
+  document.getElementById('fabBtn').addEventListener('click', () => navigateTo('pay'));
+
+  // 通知ボタン
+  document.getElementById('notifBtn').addEventListener('click', () => {
+    showToast('info', 'No new notifications');
+  });
+
+  // モーダル外クリックで閉じる
+  document.getElementById('modalOverlay').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  });
+
+  // フィルター
+  setupFilters();
+
+  // リサイズ
+  window.addEventListener('resize', () => {
+    resizeCanvas();
+  });
+
+  // 支払いリターンチェック（可視性変更のフォールバック）
+  document.addEventListener('resume', () => {
+    if (state.paymentStart) handlePaymentReturn();
+  });
+}
+
+/* ==========================================
+   初期化
+   ========================================== */
+function init() {
+  setTheme(state.theme);
+  initPetals();
+  animatePetals();
+  setupEvents();
+  runEntrySequence();
+}
+
+// DOM準備完了後に初期化
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+</script>
+</body>
+</html>
